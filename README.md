@@ -1,6 +1,7 @@
 # HR-employees-attrition--analysis
 👥 HR Employee Attrition Analytics Dashboard (Power BI). I created an interactive 3-page Power BI dashboard that analyses 5,000 employee records to show why people leave, which departments and roles lose the most staff, and which current employees are most at risk.
-<img width="1413" height="423" alt="image" src="https://github.com/user-attachments/assets/0b24c817-874f-4677-9825-036f29842b67" />
+<img width="1231" height="698" alt="image" src="https://github.com/user-attachments/assets/6e05db09-df0d-4934-9cbc-f1096fb2a703" />
+
 
 
 ## Problem Statement
@@ -52,9 +53,12 @@ Some of the things I did:
 | **2. Drivers** | Why do people leave? | Gap cards (burnout, overtime, engagement, manager support, work-life balance) and attrition by band for each driver, coloured against the company average |
 | **3. Risk & Action** | Who do we act on? | At-risk employees, estimated cost, risk by department, action list of high-risk active employees, recommendations |
 
+### What are the drivers?
+<img width="1221" height="691" alt="image" src="https://github.com/user-attachments/assets/7c8dee3e-3dea-4fd7-8e07-fcbe5fa05935" />
 
-![Page 2](images/page2_drivers.png)
-![Page 3](images/page3_risk_action.png)
+### Risk and Actions
+<img width="1231" height="690" alt="image" src="https://github.com/user-attachments/assets/78f97eb8-252d-4897-b0f3-1d9417d85cca" />
+
 
 ## Key Insights & Findings
 
