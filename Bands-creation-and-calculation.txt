@@ -1,0 +1,111 @@
+
+## 1. Bands (calculated columns on `FactEmployee`)
+
+| Band column | Source column | Cut-offs |
+|---|---|---|
+| `Overtime Band` | `overtime_hours_per_week` | <5, 5-10, 10-15, 15+ |
+| `Burnout Band` | `burnout_score` | <3, 3-5, 5-7, 7+ |
+| `Engagement Band` | `engagement_score` | <4, 4-6, 6-8, 8+ |
+| `Manager Support Band` | `manager_support_score` | <4, 4-6, 6-8, 8+ |
+| `WLB Band` | `work_life_balance_score` | <4, 4-6, 6-8, 8+ |
+| `Tenure Band` | `years_at_company` | <1, 1-3, 3-5, 5-10, 10+ |
+| `Salary Hike Band` | `salary_hike_pct` | <8%, 8-10%, 10-12%, 12-15%, 15%+ |
+| `Promotion Gap Band` | `years_since_promotion` | <1, 1-2, 2-3, 3-4, 4+ |
+| `Age Band` | `age` | <25, 25-29, 30-34, 35-44, 45-54, 55+ |
+| `AI Risk Band` | `perceived_ai_job_risk` | <3, 3-5, 5-7, 7+ |
+
+```dax
+Overtime Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[overtime_hours_per_week] < 5,  "1 | 0-5 hrs",
+    FactEmployee[overtime_hours_per_week] < 10, "2 | 5-10 hrs",
+    FactEmployee[overtime_hours_per_week] < 15, "3 | 10-15 hrs",
+    "4 | 15+ hrs"
+)
+
+Burnout Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[burnout_score] < 3, "1 | Low (<3)",
+    FactEmployee[burnout_score] < 5, "2 | Moderate (3-5)",
+    FactEmployee[burnout_score] < 7, "3 | High (5-7)",
+    "4 | Severe (7+)"
+)
+
+Engagement Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[engagement_score] < 4, "1 | Disengaged (<4)",
+    FactEmployee[engagement_score] < 6, "2 | Low (4-6)",
+    FactEmployee[engagement_score] < 8, "3 | Engaged (6-8)",
+    "4 | Highly Engaged (8+)"
+)
+
+Manager Support Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[manager_support_score] < 4, "1 | Poor (<4)",
+    FactEmployee[manager_support_score] < 6, "2 | Fair (4-6)",
+    FactEmployee[manager_support_score] < 8, "3 | Good (6-8)",
+    "4 | Excellent (8+)"
+)
+
+WLB Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[work_life_balance_score] < 4, "1 | Poor (<4)",
+    FactEmployee[work_life_balance_score] < 6, "2 | Fair (4-6)",
+    FactEmployee[work_life_balance_score] < 8, "3 | Good (6-8)",
+    "4 | Excellent (8+)"
+)
+
+Tenure Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[years_at_company] < 1,  "1 | <1 yr",
+    FactEmployee[years_at_company] < 3,  "2 | 1-3 yrs",
+    FactEmployee[years_at_company] < 5,  "3 | 3-5 yrs",
+    FactEmployee[years_at_company] < 10, "4 | 5-10 yrs",
+    "5 | 10+ yrs"
+)
+
+Salary Hike Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[salary_hike_pct] < 8,  "1 | <8%",
+    FactEmployee[salary_hike_pct] < 10, "2 | 8-10%",
+    FactEmployee[salary_hike_pct] < 12, "3 | 10-12%",
+    FactEmployee[salary_hike_pct] < 15, "4 | 12-15%",
+    "5 | 15%+"
+)
+
+Promotion Gap Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[years_since_promotion] < 1, "1 | <1 yr",
+    FactEmployee[years_since_promotion] < 2, "2 | 1-2 yrs",
+    FactEmployee[years_since_promotion] < 3, "3 | 2-3 yrs",
+    FactEmployee[years_since_promotion] < 4, "4 | 3-4 yrs",
+    "5 | 4+ yrs"
+)
+
+Age Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[age] < 25, "1 | <25",
+    FactEmployee[age] < 30, "2 | 25-29",
+    FactEmployee[age] < 35, "3 | 30-34",
+    FactEmployee[age] < 45, "4 | 35-44",
+    FactEmployee[age] < 55, "5 | 45-54",
+    "6 | 55+"
+)
+
+AI Risk Band =
+SWITCH (
+    TRUE (),
+    FactEmployee[perceived_ai_job_risk] < 3, "1 | Low (<3)",
+    FactEmployee[perceived_ai_job_risk] < 5, "2 | Moderate (3-5)",
+    FactEmployee[perceived_ai_job_risk] < 7, "3 | High (5-7)",
+    "4 | Very High (7+)"
+)
